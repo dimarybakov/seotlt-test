@@ -6,9 +6,11 @@
 // import { mockNewsList } from './mock/mockNews';
 // import { AddNewsForm } from './components/AddNewsForm/AddNewsForm';
 
-import './App.css';
+import { useCallback, useState } from 'react';
 import Logo from './assets/icons/logo.svg?react';
 import { Button, Flex } from '@maxhub/max-ui';
+
+import './App.css';
 
 function App() {
   // const [news, setNews] = useState<INews[]>([]);
@@ -54,7 +56,13 @@ function App() {
   //   });
   // };
 
-  // const app = window.WebApp.initDataUnsafe;
+  const app = window.WebApp;
+
+  const [userId, setUserId] = useState<number | undefined>(undefined);
+
+  const handleClick = useCallback(() => {
+    setUserId(app?.initDataUnsafe?.user?.id);
+  }, [app?.initDataUnsafe?.user?.id]);
 
   return (
     <>
@@ -65,7 +73,8 @@ function App() {
         <Flex direction="column" align="center" justify="center" gap={10}>
           <Button>Оплатить</Button>
           <Button>Передать показания</Button>
-          <Button>Показать данные пользователя</Button>
+          <Button onClick={handleClick}>Показать данные пользователя</Button>
+          {userId && <p>{userId}</p>}
         </Flex>
 
         {/* <AddNewsForm onSubmit={addHandler} />
