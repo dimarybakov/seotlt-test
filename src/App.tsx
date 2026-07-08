@@ -58,6 +58,9 @@ function App() {
 
   const app = window.WebApp;
 
+  // подтверждение закрытия мини-приложения
+  app.enableClosingConfirmation();
+
   const [userId, setUserId] = useState<number | undefined>(undefined);
   const [username, setUsername] = useState<string | undefined>(undefined);
   const [userPhone, setUserPhone] = useState<string | undefined>(undefined);
