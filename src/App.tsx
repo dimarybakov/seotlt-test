@@ -84,7 +84,7 @@ function App() {
           <Button>Передать показания</Button>
           <Button onClick={handleClick}>Показать данные пользователя</Button>
           {userId && <p>ID: {userId}</p>}
-          {username && <p>Usernamr: {username}</p>}
+          {username && <p>Username: {username}</p>}
         </Flex>
 
         {/* <AddNewsForm onSubmit={addHandler} />
