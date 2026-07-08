@@ -87,8 +87,10 @@ function App() {
         <Logo width={100} height={100} />
         <h1 className="logo">ЭК Восток</h1>
         <Flex direction="column" align="center" justify="center" gap={10}>
-          <Button>Оплатить</Button>
-          <Button>Передать показания</Button>
+          <Button>Мои лицевые счета</Button>
+          <Button>Прием показаний</Button>
+          <Button>Оплата</Button>
+          <Button>Прием оплат по исполнительным документам</Button>
           <Button onClick={handleClick}>Показать данные пользователя</Button>
           {userId && <p>ID: {userId}</p>}
           {username && <p>Username: {username}</p>}
