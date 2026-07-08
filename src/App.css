@@ -11,3 +11,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.logo {
+  color: rgb(26, 130, 153);
+}

@@ -20,6 +20,7 @@ export const NewsItem = memo((props: NewsItemProps) => {
   const saveClickHandler = () => {
     onEdit(news.id, editNews);
     setIsEdit(false);
+    setEditNews('');
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
