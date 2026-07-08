@@ -59,10 +59,12 @@ function App() {
   const app = window.WebApp;
 
   const [userId, setUserId] = useState<number | undefined>(undefined);
+  const [username, setUsername] = useState<string | undefined>(undefined);
 
   const handleClick = useCallback(() => {
     setUserId(app?.initDataUnsafe?.user?.id);
-  }, [app?.initDataUnsafe?.user?.id]);
+    setUsername(app?.initDataUnsafe?.user?.username);
+  }, [app?.initDataUnsafe?.user?.id, app?.initDataUnsafe?.user?.username]);
 
   return (
     <>
@@ -74,7 +76,8 @@ function App() {
           <Button>Оплатить</Button>
           <Button>Передать показания</Button>
           <Button onClick={handleClick}>Показать данные пользователя</Button>
-          {userId && <p>{userId}</p>}
+          {userId && <p>ID: {userId}</p>}
+          {username && <p>Usernamr: {username}</p>}
         </Flex>
 
         {/* <AddNewsForm onSubmit={addHandler} />
