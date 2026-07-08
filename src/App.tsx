@@ -63,8 +63,15 @@ function App() {
 
   const handleClick = useCallback(() => {
     setUserId(app?.initDataUnsafe?.user?.id);
-    setUsername(app?.initDataUnsafe?.user?.username);
-  }, [app?.initDataUnsafe?.user?.id, app?.initDataUnsafe?.user?.username]);
+    const name =
+      app?.initDataUnsafe?.user?.username ??
+      app?.initDataUnsafe?.user?.first_name;
+    setUsername(name);
+  }, [
+    app?.initDataUnsafe?.user?.first_name,
+    app?.initDataUnsafe?.user?.id,
+    app?.initDataUnsafe?.user?.username,
+  ]);
 
   return (
     <>
