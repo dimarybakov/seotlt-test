@@ -64,6 +64,7 @@ function App() {
   const [userId, setUserId] = useState<number | undefined>(undefined);
   const [username, setUsername] = useState<string | undefined>(undefined);
   const [userPhone, setUserPhone] = useState<string | undefined>(undefined);
+  const [initData, setInitData] = useState<string | undefined>(undefined);
 
   const handleClick = useCallback(() => {
     setUserId(app?.initDataUnsafe?.user?.id);
@@ -71,10 +72,12 @@ function App() {
       app?.initDataUnsafe?.user?.username ??
       app?.initDataUnsafe?.user?.first_name;
     setUsername(name);
+    setInitData(app?.initData);
     window.WebApp.requestContact().then(({ phone }) => {
       setUserPhone(phone);
     });
   }, [
+    app?.initData,
     app?.initDataUnsafe?.user?.first_name,
     app?.initDataUnsafe?.user?.id,
     app?.initDataUnsafe?.user?.username,
@@ -95,6 +98,7 @@ function App() {
           {userId && <p>ID: {userId}</p>}
           {username && <p>Username: {username}</p>}
           {userPhone && <p>Phone: {userPhone}</p>}
+          {initData && <p>InitData: {initData}</p>}
         </Flex>
 
         {/* <AddNewsForm onSubmit={addHandler} />
