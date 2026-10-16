@@ -99,7 +99,7 @@ function App() {
           {username && <p>Username: {username}</p>}
           {userPhone && <p>Phone: {userPhone}</p>}
           {initData && (
-            <p style={{ textWrap: 'wrap', width: '100%' }}>
+            <p style={{ textWrap: 'wrap', width: '200px' }}>
               InitData: {initData}
             </p>
           )}
