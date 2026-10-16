@@ -98,11 +98,7 @@ function App() {
           {userId && <p>ID: {userId}</p>}
           {username && <p>Username: {username}</p>}
           {userPhone && <p>Phone: {userPhone}</p>}
-          {initData && (
-            <p style={{ textWrap: 'wrap', width: '200px' }}>
-              InitData: {initData}
-            </p>
-          )}
+          {initData && <p>InitData: {initData}</p>}
         </Flex>
 
         {/* <AddNewsForm onSubmit={addHandler} />
