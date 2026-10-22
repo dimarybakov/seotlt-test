@@ -6,11 +6,12 @@
 // import { mockNewsList } from './mock/mockNews';
 // import { AddNewsForm } from './components/AddNewsForm/AddNewsForm';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Logo from './assets/icons/logo.svg?react';
 import { Button, Flex } from '@maxhub/max-ui';
 
 import './App.css';
+import axios from 'axios';
 
 function App() {
   // const [news, setNews] = useState<INews[]>([]);
@@ -56,6 +57,13 @@ function App() {
   //   });
   // };
 
+  const api = axios.create({
+    baseURL: 'https://flk-dev.vostok-electra.ru',
+  });
+
+  const maxAppInitData =
+    'chat=%7B%22id%22%3A123164143%2C%22type%22%3A%22DIALOG%22%7D&hash=69eca68f146a5d57af336c7c89c1548ee4d57cbe1eff1507504129c632b2f6ca&auth_date=1792669262&query_id=2752eb23-84db-40f7-9d99-a56d28053578&user=%7B%22id%22%3A193198152%2C%22first_name%22%3A%22%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%B8%D0%B9%22%2C%22last_name%22%3A%22%D0%A0%D1%8B%D0%B1%D0%B0%D0%BA%D0%BE%D0%B2%22%2C%22username%22%3Anull%2C%22language_code%22%3A%22ru%22%2C%22photo_url%22%3Anull%7D&ip=93.120.209.221&start_param=';
+
   const app = window.WebApp;
 
   // подтверждение закрытия мини-приложения
@@ -64,7 +72,29 @@ function App() {
   const [userId, setUserId] = useState<number | undefined>(undefined);
   const [username, setUsername] = useState<string | undefined>(undefined);
   const [userPhone, setUserPhone] = useState<string | undefined>(undefined);
+  const [sessionId, setSessionId] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | undefined>(undefined);
   const [initData, setInitData] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    async function getSessionId() {
+      try {
+        const { data } = await api.post('/api/miniapp/CreateSession', {
+          phone: '79103979903',
+          initData: maxAppInitData,
+        });
+
+        if (data.sessionId) {
+          setSessionId(data.sessionId);
+        }
+      } catch (error) {
+        console.log(error);
+        setError(JSON.stringify(error));
+      }
+    }
+
+    getSessionId();
+  });
 
   const handleClick = useCallback(() => {
     setUserId(app?.initDataUnsafe?.user?.id);
@@ -99,6 +129,8 @@ function App() {
           {username && <p>Username: {username}</p>}
           {userPhone && <p>Phone: {userPhone}</p>}
           {initData && <p>InitData: {initData}</p>}
+          {sessionId && <p>SessionId: {sessionId}</p>}
+          {error && <p>Error: {error}</p>}
         </Flex>
 
         {/* <AddNewsForm onSubmit={addHandler} />
